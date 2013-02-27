@@ -22,7 +22,7 @@ end
 
 group :test do
   gem 'shoulda'
-
+  gem 'capybara'
 end
 
 group :development, :test do
