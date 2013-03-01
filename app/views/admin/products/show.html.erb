@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p><strong>Title:</strong> <%= @admin_product.title %></p>
+<% unless @admin_product.photo.nil? %>
+	<img src="<%= @admin_product.photo %>" width="300"/>
+<% end %>
 <p><strong>Description:</strong><br /> <%= @admin_product.description%></p>
 <p><strong>Price:</strong> <%= @admin_product.price %></p>
 
