@@ -45,7 +45,6 @@ class Admin::ProductTest < ActionDispatch::IntegrationTest
     assert has_content?('Description'),  'No description is not shown'
     assert has_content?('Price'),  'No price is not shown'
     assert has_xpath?("//img[@src = 'http://stars85.s.t.pic.centerblog.net/o/45124325.jpg']"), 'No image shown'
-    #assert has_css?("img", :src => "http://stars85.s.t.pic.centerblog.net/o/45124325.jpg")
     
     # TODO: Delete product
   end

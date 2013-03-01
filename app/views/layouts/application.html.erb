@@ -7,8 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="span12">
-    <%= yield %>
-  </div>
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <a class="brand" href="#">StoreEngine</a>
+	    <ul class="nav">
+	      <li><a href="<%= root_path %>">Home</a></li>
+	      <li><a href="<%= admin_products_path %>">Products</a></li>
+	    </ul>
+	  </div>
+	</div>
+	<div class="span12">
+		<%= yield %>
+	</div>
 </body>
 </html>
