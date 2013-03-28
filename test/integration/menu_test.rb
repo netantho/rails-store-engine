@@ -7,5 +7,7 @@ class MenuTest < ActionDispatch::IntegrationTest
     assert_equal current_path, root_path, 'Should be on the Home page'
     click_on 'Products'
     assert_equal current_path, admin_products_path, 'Should be on the Admin Products page'
+    click_on 'Categories'
+    assert_equal current_path, categories_path, 'Should be on the Categories page'
   end
 end

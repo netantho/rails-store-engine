@@ -1,14 +1,11 @@
 require 'test_helper'
 
 class Admin::ProductTest < ActionDispatch::IntegrationTest
-  test "visit products" do
-    visit admin_products_path
-    click_on 'New Product'
-    assert_equal current_path, new_admin_product_path
-  end
-  
   test 'visit product list' do
     visit admin_products_path
+    within 'h1' do
+      assert has_content?('Listing products'), 'Listing Products title not present'
+    end
     assert has_content?('Title'), 'Title unavailable'
     assert has_content?('Price'), 'Price unavailable' 
   end
@@ -41,9 +38,9 @@ class Admin::ProductTest < ActionDispatch::IntegrationTest
     
     # Show product
     all('a').select {|elt| elt.text == "Show" }.last.click
-    assert has_content?('Title'),  'No title is not shown'
-    assert has_content?('Description'),  'No description is not shown'
-    assert has_content?('Price'),  'No price is not shown'
+    assert has_content?('Title'),  'title is not shown'
+    assert has_content?('Description'),  'description is not shown'
+    assert has_content?('Price'),  'price is not shown'
     assert has_xpath?("//img[@src = 'http://stars85.s.t.pic.centerblog.net/o/45124325.jpg']"), 'No image shown'
     
     # TODO: Delete product

@@ -48,6 +48,7 @@ StoreEngine::Application.routes.draw do
 
   namespace :admin do
     resources :products
+    resources :categories
   end
 
   root :to => 'admin/products#index'

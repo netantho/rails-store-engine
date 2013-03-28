@@ -15,4 +15,7 @@ class ProductTest < ActiveSupport::TestCase
       FactoryGirl.attributes_for(:product)
   end
   
+  test 'to_s should give title' do
+    assert_equal FactoryGirl.create(:category).to_s, 'MyString'
+  end
 end
