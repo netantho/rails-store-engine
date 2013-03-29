@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p><strong>Title:</strong> <%= @admin_product.title %></p>
+<p><strong>Categories:</strong> <%= @admin_product.categories.join(', ') %></p>
 <% unless @admin_product.photo.nil? %>
 	<img src="<%= @admin_product.photo %>" width="300"/>
 <% end %>

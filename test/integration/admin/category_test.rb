@@ -6,7 +6,10 @@ class Admin::CategoryTest < ActionDispatch::IntegrationTest
     within 'h1' do
       assert has_content?('Listing categories'), 'Listing categories title not present'
     end
-    assert has_content?('Title'), 'Title unavailable'
+    within 'table' do
+      assert has_content?('Title'), 'Title unavailable'
+      assert has_content?('Products'), 'Products'
+    end
   end
   
   test "category lifecycle" do

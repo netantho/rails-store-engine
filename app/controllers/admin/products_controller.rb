@@ -40,7 +40,12 @@ class Admin::ProductsController < ApplicationController
   # POST /admin/products
   # POST /admin/products.json
   def create
+    category_ids = params[:product][:category_ids]
+    params[:product].delete(:category_ids)
     @admin_product = Product.new(params[:product])
+    if category_ids
+      category_ids.each { |id| @admin_product.categories << Category.find(id) }
+    end
 
     respond_to do |format|
       if @admin_product.save
@@ -56,7 +61,13 @@ class Admin::ProductsController < ApplicationController
   # PUT /admin/products/1
   # PUT /admin/products/1.json
   def update
+    category_ids = params[:product][:category_ids]
+    params[:product].delete(:category_ids)
     @admin_product = Product.find(params[:id])
+    params[:product][:categories] = Array.new
+    if category_ids
+      category_ids.each { |id| params[:product][:categories]. << Category.find(id) }
+    end
 
     respond_to do |format|
       if @admin_product.update_attributes(params[:product])

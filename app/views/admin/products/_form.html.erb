@@ -16,6 +16,12 @@
 		<%= f.text_field :title %>
 	</p>
 	<p>
+		<%= f.label :categories %><br />
+		<% Category.all.each do |category| %>
+			<label><%= check_box_tag :categories, category.id, @admin_product.categories.include?(category), :id => 'product_categories', :name => 'product[category_ids][]' %> <%= category.title %></label>
+		<% end %>
+	</p>
+	<p>
 		<%= f.label :photo %><br />
 		<%= f.text_field :photo %>
 	</p>

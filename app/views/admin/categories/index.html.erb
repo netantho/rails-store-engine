@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>Products</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @admin_categories.each do |admin_category| %>
   <tr>
     <td><%= admin_category.title %></td>
+    <td><%= admin_category.products.count %></td>
     <td><%= link_to 'Show', admin_category_path(admin_category) %></td>
     <td><%= link_to 'Edit', edit_admin_category_path(admin_category) %></td>
     <td><%= link_to 'Destroy', admin_category_path(admin_category), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MenuTest < ActionDispatch::IntegrationTest
+class Admin::MenuTest < ActionDispatch::IntegrationTest
   test 'visit throughout the menu' do
     visit root_url
     click_on 'Home'
