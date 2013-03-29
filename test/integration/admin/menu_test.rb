@@ -8,6 +8,6 @@ class Admin::MenuTest < ActionDispatch::IntegrationTest
     click_on 'Products'
     assert_equal current_path, admin_products_path, 'Should be on the Admin Products page'
     click_on 'Categories'
-    assert_equal current_path, categories_path, 'Should be on the Categories page'
+    assert_equal current_path, admin_categories_path, 'Should be on the Categories page'
   end
 end
