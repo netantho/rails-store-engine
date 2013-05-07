@@ -26,6 +26,9 @@ group :test do
   gem 'shoulda'
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
 end
 
 group :development, :test do
