@@ -1,3 +1,3 @@
-When /^I go to the admin page$/ do
-  visit root_url
+Given /^a category$/ do
+  FactoryGirl.create(:category)
 end
