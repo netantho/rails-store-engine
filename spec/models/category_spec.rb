@@ -7,7 +7,7 @@ describe Category do
   it { should have_many(:products) }
   
   it 'Should init' do
-    assert_equal Hash[:title => 'MyString'],
+    assert_equal Hash[title: 'MyString'],
       FactoryGirl.attributes_for(:category)
   end
   

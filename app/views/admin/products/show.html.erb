@@ -7,6 +7,7 @@
 <% end %>
 <p><strong>Description:</strong><br /> <%= @admin_product.description%></p>
 <p><strong>Price:</strong> <%= @admin_product.price %></p>
+<p><strong>Visible:</strong> <%= @admin_product.visible %></p>
 
 <%= link_to 'Destroy', admin_product_path(@admin_product), method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Edit', edit_admin_product_path(@admin_product) %> |

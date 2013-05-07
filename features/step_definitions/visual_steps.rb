@@ -26,3 +26,19 @@ end
 When /^I check (.*)/ do |locator|
   check locator
 end
+
+When /^I uncheck (.*)/ do |locator|
+  uncheck locator
+end
+
+Then /^I should see the icon (.*)$/ do |image|
+  page.should have_selector("i.#{image}")
+end
+
+Then /^I should not see the icon (.*)$/ do |image|
+  page.should_not have_selector("i.#{image}")
+end
+
+When /^I click on icon (.*)$/ do |image|
+  find(:xpath, "//a/i[@class='#{image}']/..").click
+end

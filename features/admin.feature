@@ -33,7 +33,7 @@ Feature: Admin
 			And I click on Create Category
 		Then I see Category was successfully created.
 		When I click on Categories
-			Then I see test
+		Then I see test
 
 		# Edit
 		When I click on the last Edit
@@ -76,22 +76,30 @@ Feature: Admin
 			And I click on Create Product
 		Then I see Product was successfully created.
 		When I click on Products
-			Then I see test
+		Then I see test
+			And I should see the icon icon-eye-close
+			And I should not see the icon icon-eye-open
+		When I click on icon icon-eye-close
+		Then I see test
+			And I should see the icon icon-eye-open
+			And I should not see the icon icon-eye-close
 
 		# Edit
 		When I click on the last Edit
 			And I fill in product_title with test2
 			And I fill in product_description with test area2
 			And I fill in product_price with 2
+			And I uncheck product_visible
 			And I click on Update Product
 		Then I see Product was successfully updated.
 		When I click on Back
 			Then I'm on the Products page
-			And I see test2
+			And I should see the icon icon-eye-close
+			And I should not see the icon icon-eye-open
 		
 		# Show
 		When I click on the last Show
-		Then I see Title: test2 Categories: MyString Description: test area2 Price: 2.0
+		Then I see Title: test2 Categories: MyString Description: test area2 Price: 2.0 Visible: false
 		
 		# Destroy
 		When I click on Destroy

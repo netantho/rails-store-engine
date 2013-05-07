@@ -36,7 +36,7 @@ class Admin::ProductsController < ApplicationController
   def edit
     @admin_product = Product.find(params[:id])
   end
-
+  
   # POST /admin/products
   # POST /admin/products.json
   def create
@@ -89,6 +89,38 @@ class Admin::ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_products_url }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /admin/products/1/visible
+  def visible
+    @admin_product = Product.find(params[:product_id])
+    @admin_product.visible = true
+    
+    respond_to do |format|
+      if @admin_product.save
+        format.html { redirect_to admin_products_path, notice: 'Product was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to admin_products_path, notice: 'Error while updating product.' }
+        format.json { render json: @admin_product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  # GET /admin/products/1/unvisible
+  def unvisible
+    @admin_product = Product.find(params[:product_id])
+    @admin_product.visible = false
+    
+    respond_to do |format|
+      if @admin_product.save
+        format.html { redirect_to admin_products_path, notice: 'Product was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to admin_products_path, notice: 'Error while updating product.' }
+        format.json { render json: @admin_product.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

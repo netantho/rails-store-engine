@@ -47,7 +47,10 @@ StoreEngine::Application.routes.draw do
   #   end
 
   namespace :admin do
-    resources :products
+    resources :products do
+      get 'visible'
+      get 'unvisible'
+    end
     resources :categories
   end
 

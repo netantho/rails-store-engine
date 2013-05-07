@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+  	<th></th>
     <th>Title</th>
     <th>Categories</th>
     <th>Price</th>
@@ -12,6 +13,17 @@
 
 <% @admin_products.each do |admin_product| %>
   <tr>
+  	<td>
+  		<% if admin_product.visible %>
+  			<%= link_to admin_product_unvisible_path(admin_product) do %>
+  				<i class="icon-eye-open"></i>
+  			<% end %>
+  		<% else %>
+  			<%= link_to admin_product_visible_path(admin_product) do %>
+  				<i class="icon-eye-close"></i>
+  			<% end %>
+  		<% end %>
+  	</td>
     <td><%= admin_product.title %></td>
     <td><%= admin_product.categories.join(', ') %></td>
     <td><%= admin_product.price %></td>
