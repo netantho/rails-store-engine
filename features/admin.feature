@@ -8,14 +8,14 @@ Feature: Admin
 		Given an admin
 		When I authentificate as an admin
 			And I click on Admin
-		Then I see Admin StoreEngine Website Products Categories Logged as admin@example.com Logout
+		Then I see Admin StoreEngine Website Products Categories Logged as Admin Logout
 			And I'm on the Admin Products page
 		When I click on Categories
 		Then I'm on the Admin Categories page
-			And I see Admin StoreEngine Website Products Categories Logged as admin@example.com Logout
+			And I see Admin StoreEngine Website Products Categories Logged as Admin Logout
 		When I click on Products
 		Then I'm on the Admin Products page
-			And I see Admin StoreEngine Website Products Categories Logged as admin@example.com Logout
+			And I see Admin StoreEngine Website Products Categories Logged as Admin Logout
 	
 	Scenario: Create, edit, update and delete categories
 		Given an admin

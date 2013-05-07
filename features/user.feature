@@ -49,7 +49,7 @@ Feature: Admin
 			And I fill in password with toto
 			And I click on Log in within form
 		Then I see Logged in!
-			And I see Logged as user@example.com
+			And I see Logged as User
 			And I'm on the Home page
 		When I click on Logout
 		Then I see Logged out!
@@ -61,6 +61,8 @@ Feature: Admin
 		Then I see Register
 		When I click on Register
 		Then I fill in user_email with toto@example.com
+			And I fill in user_full_name with Toto
+			And I fill in user_display_name with Super Toto
 			And I fill in user_password with tata
 			And I fill in user_password_confirmation with tata
 		When I click on Create User
@@ -73,7 +75,7 @@ Feature: Admin
 			And I fill in password with tata
 			And I click on Log in within form
 		Then I see Logged in!
-			And I see Logged as toto@example.com
+			And I see Logged as Super Toto
 			And I'm on the Home page
 		When I click on Logout
 		Then I see Logged out!
@@ -90,4 +92,4 @@ Feature: Admin
 			And I fill in password with toto
 			And I click on Log in within form
 		Then I see Invalid email or password
-			And I don't see Logged as eve@example.com
+			And I don't see Logged as Eve
