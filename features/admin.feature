@@ -48,7 +48,10 @@ Feature: Admin
 		When I click on the last Show
 		Then I see test2
 		
-		# TODO: Delete product
+		# Destroy
+		When I click on Destroy
+		Then I'm on the Categories page
+			And I don't see test2
 		
 	Scenario: Create, edit, update and delete products
 		# Create
@@ -90,5 +93,7 @@ Feature: Admin
 		When I click on the last Show
 		Then I see Title: test2 Categories: MyString Description: test area2 Price: 2.0
 		
-		# TODO: Delete product
-		
+		# Destroy
+		When I click on Destroy
+		Then I'm on the Products page
+			And I don't see test2
