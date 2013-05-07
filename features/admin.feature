@@ -83,23 +83,27 @@ Feature: Admin
 		Then I see test
 			And I should see the icon icon-eye-open
 			And I should not see the icon icon-eye-close
+		When I click on icon icon-eye-open
+		Then I see test
+			And I should see the icon icon-eye-close
+			And I should not see the icon icon-eye-open
 
 		# Edit
 		When I click on the last Edit
 			And I fill in product_title with test2
 			And I fill in product_description with test area2
 			And I fill in product_price with 2
-			And I uncheck product_visible
+			And I check product_visible
 			And I click on Update Product
 		Then I see Product was successfully updated.
 		When I click on Back
 			Then I'm on the Products page
-			And I should see the icon icon-eye-close
-			And I should not see the icon icon-eye-open
+			And I should see the icon icon-eye-open
+			And I should not see the icon icon-eye-close
 		
 		# Show
 		When I click on the last Show
-		Then I see Title: test2 Categories: MyString Description: test area2 Price: 2.0 Visible: false
+		Then I see Title: test2 Categories: MyString Description: test area2 Price: 2.0 Visible: true
 		
 		# Destroy
 		When I click on Destroy
