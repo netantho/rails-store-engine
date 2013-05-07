@@ -1,4 +1,6 @@
 class Admin::CategoriesController < ApplicationController
+  before_filter :require_login_admin
+
   # GET /admin/categories
   # GET /admin/categories.json
   def index
@@ -79,5 +81,11 @@ class Admin::CategoriesController < ApplicationController
       format.html { redirect_to admin_categories_url }
       format.json { head :no_content }
     end
+  end
+  
+  protected
+
+  def choose_layout
+    "_admin"
   end
 end

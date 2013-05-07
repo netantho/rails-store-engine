@@ -1,4 +1,6 @@
 class Admin::ProductsController < ApplicationController
+  before_filter :require_login_admin
+  
   # GET /admin/products
   # GET /admin/products.json
   def index
@@ -122,5 +124,11 @@ class Admin::ProductsController < ApplicationController
         format.json { render json: @admin_product.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  protected
+  
+  def choose_layout
+    "_admin" 
   end
 end

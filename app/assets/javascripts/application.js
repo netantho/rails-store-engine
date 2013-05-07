@@ -15,3 +15,5 @@
 //= require_tree .
 // Loads all Bootstrap javascripts
 //= require bootstrap
+//= require bootstrap-alert
+//= require bootstrap-dropdown

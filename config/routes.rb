@@ -46,6 +46,11 @@ StoreEngine::Application.routes.draw do
   #     resources :products
   #   end
 
+  match 'login' => 'sessions#new'
+  match 'logout' => 'sessions#destroy'
+  match 'register' => 'users#new'
+  match 'cart' => 'carts#index'
+
   namespace :admin do
     resources :products do
       get 'visible'
@@ -53,8 +58,12 @@ StoreEngine::Application.routes.draw do
     end
     resources :categories
   end
-
-  root :to => 'admin/products#index'
+  
+  resources :sessions
+  resources :users
+  resources :products
+  
+  root :to => 'products#index'
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

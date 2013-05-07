@@ -10,9 +10,14 @@ When /^I click on the last (.*)$/ do |text|
   all('a').select {|elt| elt.text == text }.last.click
 end
 
-
 When /^I click on (.*)$/ do |text|
   click_on text
+end
+
+When /^I click on (.*) within (.*)$/ do |text, scope|
+  within(scope) do
+    click_on text
+  end
 end
 
 When /^I fill in (.*) with (.*)$/ do |name, value|

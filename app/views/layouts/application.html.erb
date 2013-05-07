@@ -7,18 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="navbar">
-	  <div class="navbar-inner">
-	    <a class="brand" href="#">StoreEngine</a>
-	    <ul class="nav">
-	      <li><a href="<%= root_path %>">Home</a></li>
-	      <li><a href="<%= admin_products_path %>">Products</a></li>
-	      <li><a href="<%= admin_categories_path %>">Categories</a></li>
-	    </ul>
-	  </div>
+	<%= yield :menu %>
+	<div class="span12">
+		<% if flash[:error] %>
+  			<div class='alert alert-error'><%=h flash[:error] %></div>
+		<% end %>
+		<% if flash[:notice] %>
+			<div class='alert alert-info'><%=h flash[:notice] %></div>
+		<% end %>
 	</div>
 	<div class="span12">
-		<%= yield %>
+		<%= content_for?(:content) ? yield(:content) : yield %>
 	</div>
 </body>
 </html>
