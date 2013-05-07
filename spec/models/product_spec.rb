@@ -6,6 +6,12 @@ describe Product do
   it { should validate_presence_of(:description) }
   it { should_not allow_value('').for(:description) }
   it { should validate_presence_of(:price) }
+  it { should_not allow_value('a').for(:price) }
+  it { should_not allow_value(-4).for(:price) }
+  it { should_not allow_value('8.8.8.8').for(:photo)}
+  it { should allow_value('').for(:photo) }
+  it { should have_many(:categories) }
+  it { should have_many(:classifications) }
   
   it 'Should init' do
     assert_equal Hash[:title => 'Chair',
