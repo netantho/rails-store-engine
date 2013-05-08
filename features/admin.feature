@@ -26,7 +26,6 @@ Feature: Admin
 		When I go to the Admin page
 		When I click on Categories
 		Then I'm on the Admin Categories page
-			And I see Listing categories
 			And I see Title
 			And I see Products
 		When I click on New Category
@@ -65,7 +64,6 @@ Feature: Admin
 		Given a category
 		When I go to the Admin page
 		Then I'm on the Admin Products page
-			And I see Listing products
 			And I see Title
 			And I see Categories
 			And I see Price
