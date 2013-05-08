@@ -11,7 +11,7 @@
 			</a>
 			<ul class="dropdown-menu">
 				<% categories.each do |category| %>
-					<li><a href=#><%= category.title %></a></li>
+					<li class="<%= nav_class(category_path category) %>"><a href="<%= category_path category %>"><%= category.title %></a></li>
 				<% end %>
 			</ul>
 		  </li>

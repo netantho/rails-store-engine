@@ -62,6 +62,7 @@ StoreEngine::Application.routes.draw do
   resources :sessions
   resources :users
   resources :products
+  resources :categories
   
   root :to => 'products#index'
 

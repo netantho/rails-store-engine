@@ -27,7 +27,7 @@ describe Product do
   end
   
   it 'Can be visible or unvisible' do
-    p = FactoryGirl.create(:product_not_visible)
+    p = FactoryGirl.create(:product_unvisible)
     p.visible.should be_false
     p.visible = true
     p.save

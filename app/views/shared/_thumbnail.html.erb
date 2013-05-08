@@ -1,0 +1,23 @@
+<li class="span4">
+  <div class="thumbnail">
+    <% if product.photo.nil? or product.photo.blank? %>
+      <img data-src="/assets/holder.js/300x200" alt="" />
+    <% else %>
+      <div id="<%= product.id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="<%= product.title %>Label" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="<%= product.title %>Label"><%= product.title %></h3>
+        </div>
+        <div class="modal-body">
+          <img src="<%= product.photo %>" />
+        </div>
+      </div>
+      <a class="thumbnail" href="#<%= product.id %>" data-toggle="modal">
+        <img style="height: 200px; width: 300px;" src="<%= product.photo %>" />
+      </a>
+    <% end %>
+    <p><%= product.categories.join(", ") %></p>
+    <h3><%= product.title %> $<%= product.price %></h3>
+    <p><a class="btn btn-primary" href=#>Add to Cart</a></p>
+  </div>
+</li>

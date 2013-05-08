@@ -94,9 +94,18 @@ Feature: Admin
 		Then I see Invalid email or password
 			And I don't see Logged as Eve
 
-	Scenario: Should see visible products on the home page
+	Scenario: Should see visible products
 		Given a product
 		Given a table product
+		Given an unvisible chair
+		Given a gift
 		When I go to the root page
 		Then I see Chair $50.5
+			And I see MyString Gift $10.5
 			And I see Table $100
+			And I don't see Unvisible Chair
+		When I click on MyString
+		Then I see MyString Gift $10.5
+			And I don't see Chair $50.5
+			And I don't see Table $100
+			And I don't see Unvisible Chair

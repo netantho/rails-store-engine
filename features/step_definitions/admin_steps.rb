@@ -10,6 +10,14 @@ Given /^a table product$/ do
   FactoryGirl.create(:table)
 end
 
+Given /^an unvisible chair$/ do
+  FactoryGirl.create(:product_unvisible)
+end
+
+Given /^a gift$/ do
+  FactoryGirl.create(:product_with_category)
+end
+
 Given /^an admin$/ do
   FactoryGirl.create(:admin)
 end
