@@ -64,6 +64,10 @@ StoreEngine::Application.routes.draw do
   resources :products
   resources :categories
   
+  match '/cart/:product_id/add' => 'carts#add', as: :cart_add
+  match '/cart/:product_id/del' => 'carts#del', as: :cart_del
+  match '/cart/empty' => 'carts#empty', as: :cart_empty
+
   root :to => 'products#index'
 
   # You can have the root of your site routed with "root"

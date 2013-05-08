@@ -10,6 +10,10 @@ When /^I click on the last (.*)$/ do |text|
   all('a').select {|elt| elt.text == text }.last.click
 end
 
+When /^I click on the ([0-9]+)th (.*)$/ do |i, text|
+  all('a').select {|elt| elt.text == text }[i.to_i].click
+end
+
 When /^I click on (.*)$/ do |text|
   click_on text
 end
@@ -46,4 +50,8 @@ end
 
 When /^I click on icon (.*)$/ do |image|
   find(:xpath, "//a/i[@class='#{image}']/..").click
+end
+
+When /^I click on the ([0-9]+)th icon (.*)$/ do |i, image|
+  all(:xpath, "//a/i[@class='#{image}']/..")[i.to_i].click
 end

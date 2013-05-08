@@ -17,7 +17,13 @@
 		  </li>
 	    </ul>
 	    <ul class="nav pull-right">
-	    	<li class="<%= nav_class cart_path %>"><a href="<%= cart_path %>">Cart: 0 items</a></li>
+	    	<li class="<%= nav_class cart_path %>"><a href="<%= cart_path %>">
+	    		<% if session.has_key? :cart %>
+	    			<%= "Cart: #{session[:cart][:num]} items"%>
+	    		<% else %>
+	    			Cart: 0 items
+	    		<% end %>
+	    	</a></li>
 	    	<% if current_admin? %>
 	    		<li><a href="<%= admin_products_path %>">Admin</a></li>
 	    	<% end %>

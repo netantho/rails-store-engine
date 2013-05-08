@@ -109,3 +109,23 @@ Feature: Admin
 			And I don't see Chair $50.5
 			And I don't see Table $100
 			And I don't see Unvisible Chair
+			
+	Scenario: Should be able to add products to cart
+		Given a product
+		Given a table product
+		When I go to the root page
+		Then I see Chair $50.5
+			And I see Table $100
+			And I see Cart: 0 items
+		When I click on the 0th Add to Cart
+		Then I see Cart: 1 items
+		When I click on the 1th Add to Cart
+		Then I see Cart: 2 items
+		When I click on Cart: 2 items
+		Then I see Price Quantity Total Chair Four chair legs $50.5 1 $50.5 Table Simple table $100.0 1 $100.0 $150.5 Empty your cart Buy
+		When I click on the 0th icon icon-plus-sign icon-white
+		Then I see Chair Four chair legs $50.5 2 $101.0 Table Simple table $100.0 1 $100.0 $201.0
+		When I click on the 1th icon icon-minus-sign icon-white
+		Then I see Chair Four chair legs $50.5 2 $101.0
+		When I click on the 0th icon icon-minus-sign icon-white
+		Then I see Chair Four chair legs $50.5 1 $50.5

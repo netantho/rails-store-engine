@@ -1,0 +1,45 @@
+<table class="table">
+  <thead>
+  	<tr>
+  	  <th></th>
+  	  <th></th>
+  	  <th>Price</th>
+  	  <th>Quantity</th>
+  	  <th>Total</th>
+  	</tr>
+  </thead>
+  <tbody>
+  	<% if session.has_key?(:cart) && !session[:cart].nil? %>
+  	  <% session[:cart][:items].each do |key, value| %>
+  	  	<% if !value.nil? %>
+		  	<tr>
+		  	  <td><%= image_tag value[:photo], {style: 'height: 60px;'} if value[:photo] %></td>
+		  	  <td>
+		  	  	<p class="text-bold text-huge"><%= value[:title] %></p>
+		  	  	<p><%= value[:description] %></p>
+		  	  </td>
+		  	  <td>$<%= value[:price] %></td>
+		  	  <td>
+		  	  	<p><%= value[:quantity] %></p>
+		  	  	<p>
+			  	  <a href="<%= cart_add_path key %>" class="btn btn-success"><i class="icon-plus-sign icon-white"></i></a>
+			  	  <a href="<%= cart_del_path key %>" class="btn btn-danger"><i class="icon-minus-sign icon-white"></i></a>
+		  	    </p>
+		  	  </td>
+		  	  <td>$<%= value[:total] %></td>
+		  	</tr>
+	  	<% end %>
+	  <% end %>
+	  <tr>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	<td>$<%= session[:cart][:price] %></td>
+	  </tr>
+	<% end %>
+  </tbody>
+</table>
+
+<a href="<%= cart_empty_path %>" class="btn btn-danger">Empty your cart</a>
+<a href="#" class="btn btn-info">Buy</a>
