@@ -3,7 +3,16 @@ FactoryGirl.define do
     title 'Chair'
     description 'Four chair legs'
     price 50.5
-    photo 'http://stars85.s.t.pic.centerblog.net/o/45124325.jpg'
-    visible false
+    visible true
+
+    factory :table do
+      title 'Table'
+      description 'Simple table'
+      price 100
+    end
+
+    factory :product_not_visible do
+      visible false
+    end
   end
 end

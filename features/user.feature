@@ -82,7 +82,7 @@ Feature: Admin
 			And I see Log in
 			And I'm on the Home page
 	
-	Scenario: invalid user should not be able to login
+	Scenario: Invalid user should not be able to login
 		When I go to the root page
 		Then I see Log in
 		When I click on Log in
@@ -93,3 +93,10 @@ Feature: Admin
 			And I click on Log in within form
 		Then I see Invalid email or password
 			And I don't see Logged as Eve
+
+	Scenario: Should see visible products on the home page
+		Given a product
+		Given a table product
+		When I go to the root page
+		Then I see Chair $50.5
+			And I see Table $100

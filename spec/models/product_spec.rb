@@ -18,8 +18,7 @@ describe Product do
     assert_equal Hash[title: 'Chair',
       description: 'Four chair legs',
       price: 50.5,
-      photo: 'http://stars85.s.t.pic.centerblog.net/o/45124325.jpg',
-      visible: false],
+      visible: true],
       FactoryGirl.attributes_for(:product)
   end
   
@@ -28,7 +27,7 @@ describe Product do
   end
   
   it 'Can be visible or unvisible' do
-    p = FactoryGirl.create(:product)
+    p = FactoryGirl.create(:product_not_visible)
     p.visible.should be_false
     p.visible = true
     p.save

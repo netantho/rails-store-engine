@@ -2,6 +2,14 @@ Given /^a category$/ do
   FactoryGirl.create(:category)
 end
 
+Given /^a product$/ do
+  FactoryGirl.create(:product)
+end
+
+Given /^a table product$/ do
+  FactoryGirl.create(:table)
+end
+
 Given /^an admin$/ do
   FactoryGirl.create(:admin)
 end

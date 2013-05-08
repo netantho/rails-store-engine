@@ -9,6 +9,8 @@ class Product < ActiveRecord::Base
   has_many :categories, through: :classifications
   has_many :classifications
 
+  scope :visible, lambda { where(visible: true) }
+
   def to_s
     title
   end
