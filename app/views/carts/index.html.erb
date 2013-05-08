@@ -48,4 +48,9 @@
 </table>
 
 <a href="<%= cart_empty_path %>" class="btn btn-danger">Empty your cart</a>
-<a href="#" class="btn btn-info">Buy</a>
+
+<% if current_user %>
+	<a href="#" class="btn btn-info">Buy</a>
+<% else %>
+	<a href="<%= login_path %>" class="btn btn-info">Log in to buy</a>
+<% end %>

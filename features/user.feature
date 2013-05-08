@@ -115,6 +115,7 @@ Feature: Admin
 	Scenario: Should be able to add products to cart
 		Given a product
 		Given a table product
+		Given a user
 		When I go to the root page
 		Then I see Chair $50.5
 			And I see Table $100
@@ -124,9 +125,14 @@ Feature: Admin
 		When I click on the 1th Add to Cart
 		Then I see Cart: 2 items
 		When I click on Cart: 2 items
-		Then I see Price Quantity Total Chair Four chair legs $50.5 1 $50.5 Table Simple table $100.0 1 $100.0 $150.5 Empty your cart Buy
+		Then I see Price Quantity Total Chair Four chair legs $50.5 1 $50.5 Table Simple table $100.0 1 $100.0 $150.5 Empty your cart Log in to buy
 		When I click on the 0th icon icon-plus-sign icon-white
 		Then I see Chair Four chair legs $50.5 2 $101.0 Table Simple table $100.0 1 $100.0 $201.0
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I click on Cart: 3 items
+		Then I'm on the Cart page
+			And I see Buy
 		When I click on the 1th icon icon-minus-sign icon-white
 		Then I see Chair Four chair legs $50.5 2 $101.0
 		When I click on the 0th icon icon-minus-sign icon-white
