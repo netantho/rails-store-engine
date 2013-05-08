@@ -18,7 +18,7 @@
     <% end %>
     <p><%= product.categories.join(", ") %></p>
     <h3>
-    	<%= product.title %>
+    	<a href="<%= product_path product %>"><%= product.title %></a>
     	$<%= product.price %>
     </h3>
     <p><a class="btn btn-primary" href="<%= cart_add_path product.id %>">Add to Cart</a></p>

@@ -109,6 +109,8 @@ Feature: Admin
 			And I don't see Chair $50.5
 			And I don't see Table $100
 			And I don't see Unvisible Chair
+		When I click on Gift
+		Then I see Gift $10.5 Surprise! Add to Cart
 			
 	Scenario: Should be able to add products to cart
 		Given a product
@@ -129,3 +131,5 @@ Feature: Admin
 		Then I see Chair Four chair legs $50.5 2 $101.0
 		When I click on the 0th icon icon-minus-sign icon-white
 		Then I see Chair Four chair legs $50.5 1 $50.5
+		When I click on Chair
+		Then I see Chair $50.5 Four chair legs Add to Cart

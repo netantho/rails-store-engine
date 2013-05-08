@@ -15,15 +15,21 @@
 		  	<tr>
 		  	  <td><%= image_tag value[:photo], {style: 'height: 60px;'} if value[:photo] %></td>
 		  	  <td>
-		  	  	<p class="text-bold text-huge"><%= value[:title] %></p>
+		  	  	<p class="text-bold text-huge">
+		  	  		<a href="<%= product_path key %>"><%= value[:title] %></a>
+		  	  	</p>
 		  	  	<p><%= value[:description] %></p>
 		  	  </td>
 		  	  <td>$<%= value[:price] %></td>
 		  	  <td>
 		  	  	<p><%= value[:quantity] %></p>
 		  	  	<p>
-			  	  <a href="<%= cart_add_path key %>" class="btn btn-success"><i class="icon-plus-sign icon-white"></i></a>
-			  	  <a href="<%= cart_del_path key %>" class="btn btn-danger"><i class="icon-minus-sign icon-white"></i></a>
+			  	  <a href="<%= cart_add_path key %>" class="btn btn-success">
+			  	  	<i class="icon-plus-sign icon-white"></i>
+			  	  </a>
+			  	  <a href="<%= cart_del_path key %>" class="btn btn-danger">
+			  	  	<i class="icon-minus-sign icon-white"></i>
+			  	  </a>
 		  	    </p>
 		  	  </td>
 		  	  <td>$<%= value[:total] %></td>

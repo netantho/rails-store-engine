@@ -1,0 +1,9 @@
+<div class="span4">
+	<img src="<%= @product.photo %>" height='600'>
+</div>
+<div class="span7">
+	<h2><%= @product.title %></h2>
+	<p class='label label-info'>$<%= @product.price %></p>
+	<p><%= @product.description %></p>
+	<p><a class="btn btn-primary" href="<%= cart_add_path @product.id %>">Add to Cart</a></p>
+</div>
