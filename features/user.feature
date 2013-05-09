@@ -6,6 +6,7 @@ Feature: Admin
 	
 	Scenario: Navigate through the menu
 		Given a category
+		Given a user
 		When I go to the root page
 		Then I see Home Categories MyString Cart: 0 items Register Log in
 		When I click on Home
@@ -20,6 +21,10 @@ Feature: Admin
 		When I click on Log in
 		Then I'm on the Log in page
 			And I see Home Categories MyString Cart: 0 items Register Log in
+		When I authentificate as a user
+		Then I see Home Categories MyString Cart: 0 items Logged as User Past Orders Logout
+		When I click on Past Orders
+		Then I'm on /orders
 
 	Scenario: Not authorized to access admin pages
 		When I go to the Admin page
@@ -163,7 +168,7 @@ Feature: Admin
 		When I go to /cart/checkout
 		Then I see You need to have at least one item in your cart to checkout.
 	
-	Scenario: Should have at least one item on cart to be able to checkout
+	Scenario: Should be able to checkout and see past orders
 		Given a product
 		Given a user
 		When I authentificate as a user
@@ -174,6 +179,29 @@ Feature: Admin
 		Then I see Buy
 		When I click on Buy
 		Then I'm on the Home page
-			And I see Your order has been completed, you should receive it in 5 business days
+			And I see Your order has been completed, you should receive it in 5 business days.
 			And I see Cart: 0 items
-		# TODO: should be able to see it in past orders
+		When I click on Past Orders
+		Then I see Details
+			And I see pending
+			And I see $50.5
+		When I click on Details
+		Then I see Status: pending
+			And I see Chair Four chair legs $50.5 1 $50.5 $50.5
+
+	Scenario: Should display an error when attempting to view a order that doesn't exist
+		Given a user
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I go to /orders/666
+		Then I see Invalid order
+		
+	Scenario: Should not be able to view orders of others
+		Given a user
+		Given an order
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I go to /orders
+		Then I don't see Details
+		When I go to /orders/1
+		Then I see Invalid order

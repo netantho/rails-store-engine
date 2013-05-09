@@ -14,6 +14,10 @@ When /^I go to the Admin Categories page$/ do
   visit admin_categories_path
 end
 
+Then /^I'm on (.*)$/ do |url|
+  assert_equal current_path, url, "Should be at #{url}"
+end 
+
 Then /^I'm on the Home page$/ do
   assert_equal current_path, root_path, 'Should be on the Home page'
 end

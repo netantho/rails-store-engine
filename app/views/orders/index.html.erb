@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+  	<tr>
+  	  <th></th>
+  	  <th>Status</th>
+  	  <th>Shipment/Cancellation date</th>
+  	  <th>Total Price</th>
+  	</tr>
+  </thead>
+  <tbody>
+  	<% if @orders %>
+	  <% @orders.each do |order| %>
+		<tr>
+		  <td><a href="<%= order_path order %>" class="btn">Details</td>
+		  <td><%= order.status %></td>
+		  <td><%= order.date_shipment %></td>
+		  <td>$<%= order.total_price %></td>
+		</tr>
+	  <% end %>
+	<% end %>
+  </tbody>
+</table>
+
+<% if !session[:cart].nil? %>
+	<a href="<%= cart_empty_path %>" class="btn btn-danger">Empty your cart</a>
+<% end %>
+
+<% if current_user && !session[:cart].nil? %>
+	<a href="<%= cart_checkout_path %>" class="btn btn-info">Buy</a>
+<% elsif !current_user && !session[:cart].nil? %>
+	<a href="<%= login_path %>" class="btn btn-info">Log in to buy</a>
+<% end %>

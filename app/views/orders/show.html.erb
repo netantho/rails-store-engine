@@ -1,0 +1,39 @@
+<div class="span12">
+	<p>Status: <strong><%= @order.status %></strong></p>
+	<p>Shipment/Cancellation date: <%= @order.date_shipment %></p>
+	
+	<table class="table">
+	  <thead>
+	  	<tr>
+	  	  <th></th>
+	  	  <th></th>
+	  	  <th>Price</th>
+	  	  <th>Quantity</th>
+	  	  <th>Total</th>
+	  	</tr>
+	  </thead>
+	  <tbody>
+	    <% @order.sales.each do |sale| %>
+		  <tr>
+		    <td><%= image_tag sale.product.photo, {style: 'height: 60px;'} if sale.product.photo %></td>
+		  	<td>
+		  	  <p class="text-bold text-huge">
+		  	  		<a href="<%= product_path sale.product %>"><%= sale.product.title %></a>
+		  	  </p>
+		  	  <p><%= sale.product.description %></p>
+		  	</td>
+		  	<td>$<%= sale.price %></td>
+		  	<td><%= sale.quantity %></td>
+		  	<td>$<%= sale.price * sale.quantity %></td>
+		  </tr>
+	    <% end %>
+	    <tr>
+	      <td></td>
+	  	  <td></td>
+	  	  <td></td>
+	  	  <td></td>
+	  	  <td>$<%= @order.total_price %></td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>

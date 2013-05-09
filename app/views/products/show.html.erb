@@ -5,5 +5,7 @@
 	<h2><%= @product.title %></h2>
 	<p class='label label-info'>$<%= @product.price %></p>
 	<p><%= @product.description %></p>
-	<p><a class="btn btn-primary" href="<%= cart_add_path @product.id %>">Add to Cart</a></p>
+	<% if @product.visible %>
+		<p><a class="btn btn-primary" href="<%= cart_add_path @product.id %>">Add to Cart</a></p>
+	<% end %>
 </div>

@@ -4,6 +4,6 @@ class ProductsController < ApplicationController
   end
   
   def show
-    @product = Product.visible.find_by_id(params[:id])
+    @product = Product.find_by_id(params[:id])
   end
 end

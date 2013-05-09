@@ -2,6 +2,10 @@ Given /^a user$/ do
   FactoryGirl.create(:user)
 end
 
+Given /^an order$/ do
+  FactoryGirl.create(:order)
+end
+
 When /^I authentificate as a user$/ do
   u = FactoryGirl.build(:user)
   visit login_url
