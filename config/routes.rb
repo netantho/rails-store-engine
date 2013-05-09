@@ -68,9 +68,11 @@ StoreEngine::Application.routes.draw do
   match '/cart/:product_id/del' => 'carts#del', as: :cart_del
   match '/cart/empty' => 'carts#empty', as: :cart_empty
   match '/cart/checkout' => 'carts#checkout', as: :cart_checkout
+  match '/cart/quick_order/:product_id' => 'carts#quick_order', as: :quick_order
   
   match '/orders' => 'orders#index', as: :orders
   match '/orders/:id' => 'orders#show',as: :order
+
 
   root :to => 'products#index'
 

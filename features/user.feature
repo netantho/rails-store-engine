@@ -205,3 +205,37 @@ Feature: Admin
 		Then I don't see Details
 		When I go to /orders/1
 		Then I see Invalid order
+
+	Scenario: Anonymous visitors should not be able to quick order
+		Given a product
+		Given an unvisible chair
+		Given a user
+		When I go to /products/1
+		Then I see Chair
+			And I don't see Place an order for 'Chair'?
+		When I go to /cart/quick_order/1
+			Then I see You must be logged in to access this section
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I go to /cart/quick_order/2
+			Then I see Invalid product
+
+	Scenario: Logged in users should be able to quick order
+		Given a user
+		Given a product
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I click on Chair
+		Then I see Place an order for 'Chair'?
+			And I see OK
+		When I click on OK
+		Then I'm on the Home page
+			And I see Your order has been completed, you should receive it in 5 business days.
+			And I see Cart: 0 items
+		When I click on Past Orders
+		Then I see Details
+			And I see pending
+			And I see $50.5
+		When I click on Details
+		Then I see Status: pending
+			And I see Chair Four chair legs $50.5 1 $50.5 $50.5

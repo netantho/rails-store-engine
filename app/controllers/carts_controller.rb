@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
-  before_filter :require_login_user, only: [:checkout]
+  before_filter :require_login_user, only: [:checkout, :quick_order]
   before_filter :have_at_least_one_item_in_cart, only: [:checkout]
+  before_filter :item_should_be_visible, only: [:quick_order]
   
   def index
     if session.has_key?(:cart) && !session[:cart].nil?
@@ -80,11 +81,27 @@ class CartsController < ApplicationController
     redirect_to root_path, notice: 'Your order has been completed, you should receive it in 5 business days.'
   end
 
+  def quick_order
+    p = Product.visible.find_by_id params[:product_id]
+    s = Sale.new(quantity: 1, price: p.price)
+    s.product = p
+    s.save
+    Order.create(status: 'pending', total_price: p.price, sales: [s], user: current_user)
+    redirect_to root_path, notice: 'Your order has been completed, you should receive it in 5 business days.'
+  end
+
   private
   
   def have_at_least_one_item_in_cart
     if session[:cart].nil?
       flash[:error] = "You need to have at least one item in your cart to checkout."
+      redirect_to root_url
+    end
+  end
+  
+  def item_should_be_visible
+    if !Product.visible.find_by_id params[:product_id]
+      flash[:error] = "Invalid product"
       redirect_to root_url
     end
   end

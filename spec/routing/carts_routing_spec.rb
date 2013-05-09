@@ -20,4 +20,8 @@ describe CartsController do
   it "understands and serves /cart/checkout" do
     { get: "/cart/checkout" }.should route_to(controller: "carts", action: "checkout")
   end
+  
+  it "understands and serves /cart/quick_order/:product_id" do
+    { get: "/cart/quick_order/1" }.should route_to(controller: "carts", action: "quick_order", product_id: '1')
+  end
 end
