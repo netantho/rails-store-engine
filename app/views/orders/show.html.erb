@@ -1,6 +1,7 @@
 <div class="span12">
 	<p>Status: <strong><%= @order.status %></strong></p>
-	<p>Shipment/Cancellation date: <%= @order.date_shipment %></p>
+	<p>Submission date: <%= @order.created_at %></p>
+	<p><%= "Shipment/Cancellation date: #{@order.date_shipment}" if ['shipped', 'cancelled'].include? @order.status %></p>
 	
 	<table class="table">
 	  <thead>

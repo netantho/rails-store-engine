@@ -3,6 +3,7 @@
   	<tr>
   	  <th></th>
   	  <th>Status</th>
+  	  <th>Submission date</th>
   	  <th>Shipment/Cancellation date</th>
   	  <th>Total Price</th>
   	</tr>
@@ -13,6 +14,7 @@
 		<tr>
 		  <td><a href="<%= order_path order %>" class="btn">Details</td>
 		  <td><%= order.status %></td>
+		  <td><%= order.created_at %></td>
 		  <td><%= order.date_shipment %></td>
 		  <td>$<%= order.total_price %></td>
 		</tr>
