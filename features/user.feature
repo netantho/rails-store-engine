@@ -139,3 +139,41 @@ Feature: Admin
 		Then I see Chair Four chair legs $50.5 1 $50.5
 		When I click on Chair
 		Then I see Chair $50.5 Four chair legs Add to Cart
+		When I click on Cart: 1 items
+		Then I see Empty your cart
+		When I click on Empty your cart
+		Then I see Cart: 0 items
+
+	Scenario: Should not be able to checkout if anonymous
+		Given a product
+		When I go to the root page
+		Then I see Chair $50.5
+		When I click on the 0th Add to Cart
+		Then I see Cart: 1 items
+		When I click on Cart: 1 items
+		Then I see Log in to buy
+		When I go to /cart/checkout
+		Then I see You must be logged in to access this section
+	
+	Scenario: Should have at least one item on cart to be able to checkout
+		Given a product
+		Given a user
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I go to /cart/checkout
+		Then I see You need to have at least one item in your cart to checkout.
+	
+	Scenario: Should have at least one item on cart to be able to checkout
+		Given a product
+		Given a user
+		When I authentificate as a user
+		Then I'm on the Home page
+		When I click on the 0th Add to Cart
+		Then I see Cart: 1 items
+		When I click on Cart: 1 items
+		Then I see Buy
+		When I click on Buy
+		Then I'm on the Home page
+			And I see Your order has been completed, you should receive it in 5 business days
+			And I see Cart: 0 items
+		# TODO: should be able to see it in past orders

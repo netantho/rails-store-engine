@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true, email: true, on: :create
   validates :role, inclusion: { in: %w(admin user), :message => "%{value} is not a valid role" }, on: :save
   validates_format_of :full_name, without: /^$/, message: "can not be empty"
+  has_many :orders
   before_save :default_values
   
   def default_values

@@ -67,6 +67,7 @@ StoreEngine::Application.routes.draw do
   match '/cart/:product_id/add' => 'carts#add', as: :cart_add
   match '/cart/:product_id/del' => 'carts#del', as: :cart_del
   match '/cart/empty' => 'carts#empty', as: :cart_empty
+  match '/cart/checkout' => 'carts#checkout', as: :cart_checkout
 
   root :to => 'products#index'
 

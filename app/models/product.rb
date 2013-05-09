@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
   validates :visible, inclusion: { in: [true, false] }
   has_many :categories, through: :classifications
   has_many :classifications
+  has_many :sales
 
   scope :visible, lambda { where(visible: true) }
 

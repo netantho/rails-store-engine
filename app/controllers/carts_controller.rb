@@ -1,4 +1,7 @@
 class CartsController < ApplicationController
+  before_filter :require_login_user, only: [:checkout]
+  before_filter :have_at_least_one_item_in_cart, only: [:checkout]
+  
   def index
     if session.has_key?(:cart) && !session[:cart].nil?
       session[:cart][:price] = 0
@@ -56,5 +59,33 @@ class CartsController < ApplicationController
       session[:cart] = nil
     end
     redirect_to root_path
+  end
+  
+  def checkout
+    total_price = 0
+    sales = []
+    session[:cart][:items].each do |key, value|
+      if !value.nil?
+        product = Product.visible.find_by_id(key)
+        sale = Sale.new(quantity: session[:cart][:items][key][:quantity],
+                          price: product.price)
+        sale.product = product
+        sale.save
+        sales << sale
+        total_price += product.price * sale.quantity
+      end
+    end
+    Order.create(status: 'pending', total_price: total_price, sales: sales, user: current_user)
+    session[:cart] = nil
+    redirect_to root_path, notice: 'Your order has been completed, you should receive it in 5 business days.'
+  end
+
+  private
+  
+  def have_at_least_one_item_in_cart
+    if session[:cart].nil?
+      flash[:error] = "You need to have at least one item in your cart to checkout."
+      redirect_to root_url
+    end
   end
 end

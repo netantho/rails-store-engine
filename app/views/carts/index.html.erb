@@ -47,10 +47,12 @@
   </tbody>
 </table>
 
-<a href="<%= cart_empty_path %>" class="btn btn-danger">Empty your cart</a>
+<% if !session[:cart].nil? %>
+	<a href="<%= cart_empty_path %>" class="btn btn-danger">Empty your cart</a>
+<% end %>
 
-<% if current_user %>
-	<a href="#" class="btn btn-info">Buy</a>
-<% else %>
+<% if current_user && !session[:cart].nil? %>
+	<a href="<%= cart_checkout_path %>" class="btn btn-info">Buy</a>
+<% elsif !current_user && !session[:cart].nil? %>
 	<a href="<%= login_path %>" class="btn btn-info">Log in to buy</a>
 <% end %>

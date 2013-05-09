@@ -1,3 +1,7 @@
+When /^I go to (.*)$/ do |url|
+  visit url
+end
+
 When /^I go to the root page$/ do
   visit root_url
 end
