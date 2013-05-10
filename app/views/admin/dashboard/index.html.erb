@@ -1,0 +1,27 @@
+<div class="span12">
+	<ul class="nav nav-tabs" id="myTab">
+		<li class="active"><a href="#pending" data-toggle="tab">Pending (<%= @orders_pending.size %>)</a></li>
+		<li><a href="#cancelled" data-toggle="tab">Cancelled (<%= @orders_cancelled.size %>)</a></li>
+		<li><a href="#paid" data-toggle="tab">Paid (<%= @orders_paid.size %>)</a></li>
+		<li><a href="#shipped" data-toggle="tab">Shipped (<%= @orders_shipped.size %>)</a></li>
+		<li><a href="#returned" data-toggle="tab">Returned (<%= @orders_returned.size %>)</a></li>
+	</ul>
+	 
+	<div class="tab-content">
+		<div class="tab-pane active" id="pending">
+			<%= render 'orders', orders: @orders_pending %>
+		</div>
+		<div class="tab-pane" id="cancelled">
+			<%= render 'orders', orders: @orders_cancelled %>
+		</div>
+		<div class="tab-pane" id="paid">
+			<%= render 'orders', orders: @orders_paid %>
+		</div>
+		<div class="tab-pane" id="shipped">
+			<%= render 'orders', orders: @orders_shipped %>
+		</div>
+		<div class="tab-pane" id="returned">
+			<%= render 'orders', orders: @orders_returned %>
+		</div>
+	</div>
+</div>

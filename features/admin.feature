@@ -8,14 +8,17 @@ Feature: Admin
 		Given an admin
 		When I authentificate as an admin
 			And I click on Admin
-		Then I see Admin StoreEngine Website Products Categories Logged as Admin Logout
-			And I'm on the Admin Products page
+		Then I see Admin StoreEngine Website Dashboard Products Categories Logged as Admin Logout
+			And I'm on /admin/dashboard
+		When I click on Dashboard
+		Then I see Admin StoreEngine Website Dashboard Products Categories Logged as Admin Logout
+			And I'm on /admin/dashboard
 		When I click on Categories
 		Then I'm on the Admin Categories page
-			And I see Admin StoreEngine Website Products Categories Logged as Admin Logout
+			And I see Admin StoreEngine Website Dashboard Products Categories Logged as Admin Logout
 		When I click on Products
 		Then I'm on the Admin Products page
-			And I see Admin StoreEngine Website Products Categories Logged as Admin Logout
+			And I see Admin StoreEngine Website Dashboard Products Categories Logged as Admin Logout
 	
 	Scenario: Create, edit, update and delete categories
 		Given an admin
@@ -114,3 +117,132 @@ Feature: Admin
 		When I click on Destroy
 		Then I'm on the Admin Products page
 			And I don't see test2
+
+	Scenario: dashboard with a pending order
+	    Given an order
+	    Given an admin
+		When I authentificate as an admin
+			And I click on Admin
+		Then I'm on /admin/dashboard
+			And I see Pending (1) Cancelled (0) Paid (0) Shipped (0) Returned (0)
+			And I see User $1.5
+		When I go to /admin/dashboard/1/ship
+		Then I see Order must be paid
+		When I go to /admin/dashboard/1/return
+		Then I see Order must be shipped
+		When I click on Details
+		Then I'm on /admin/dashboard/1
+			And I see Status: pending Cancel
+			And I don't see Mark as returned
+			And I don't see Mark as shipped
+			And I see Customer: User (user@example.com)
+			And I see Chair Four chair legs $1.5 1 $1.5 $1.5
+		When I click on icon icon-plus-sign icon-white
+			And I click on icon icon-plus-sign icon-white
+		Then I see Chair Four chair legs $1.5 3 $4.5 $4.5
+		When I click on icon icon-minus-sign icon-white
+		Then I see Chair Four chair legs $1.5 2 $3.0 $3.0
+		When I click on Cancel
+		Then I'm on /admin/dashboard
+			And I see Order is now cancelled
+			And I see Pending (0) Cancelled (1) Paid (0) Shipped (0) Returned (0)
+
+	Scenario: dashboard with a cancelled order
+	    Given a cancelled order
+	    Given an admin
+		When I authentificate as an admin
+			And I click on Admin
+		Then I'm on /admin/dashboard
+			And I see Pending (0) Cancelled (1) Paid (0) Shipped (0) Returned (0)
+			And I see User $1.5
+		When I go to /admin/dashboard/1/cancel
+		Then I see Order must be pending
+		When I go to /admin/dashboard/1/ship
+		Then I see Order must be paid
+		When I go to /admin/dashboard/1/return
+		Then I see Order must be shipped
+		When I click on Details
+		Then I'm on /admin/dashboard/1
+			And I see Status: cancel
+			And I don't see Status: cancelled Cancel
+			And I don't see Mark as returned
+			And I don't see Mark as shipped
+			And I see Customer: User (user@example.com)
+			And I see Chair Four chair legs $1.5 1 $1.5 $1.5
+
+	Scenario: dashboard with a paid order
+	    Given a paid order
+	    Given an admin
+		When I authentificate as an admin
+			And I click on Admin
+		Then I'm on /admin/dashboard
+			And I see Pending (0) Cancelled (0) Paid (1) Shipped (0) Returned (0)
+			And I see User $1.5
+		When I go to /admin/dashboard/1/cancel
+		Then I see Order must be pending
+		When I go to /admin/dashboard/1/return
+		Then I see Order must be shipped
+		When I click on Details
+		Then I'm on /admin/dashboard/1
+			And I see Status: paid Mark as shipped
+			And I don't see Status: paid Cancel
+			And I don't see Mark as returned
+			And I see Customer: User (user@example.com)
+			And I see Chair Four chair legs $1.5 1 $1.5 $1.5
+		When I click on icon icon-plus-sign icon-white
+			And I click on icon icon-plus-sign icon-white
+		Then I see Chair Four chair legs $1.5 3 $4.5 $4.5
+		When I click on icon icon-minus-sign icon-white
+		Then I see Chair Four chair legs $1.5 2 $3.0 $3.0
+		When I click on Mark as shipped
+		Then I'm on /admin/dashboard
+			And I see Order is now shipped
+			And I see Pending (0) Cancelled (0) Paid (0) Shipped (1) Returned (0)
+
+	Scenario: dashboard with a shipped order
+	    Given a shipped order
+	    Given an admin
+		When I authentificate as an admin
+			And I click on Admin
+		Then I'm on /admin/dashboard
+			And I see Pending (0) Cancelled (0) Paid (0) Shipped (1) Returned (0)
+			And I see User $1.5
+		When I go to /admin/dashboard/1/cancel
+		Then I see Order must be pending
+		When I go to /admin/dashboard/1/ship
+		Then I see Order must be paid
+		When I click on Details
+		Then I'm on /admin/dashboard/1
+			And I see Status: shipped
+			And I don't see Status: shipped Cancel
+			And I see Mark as returned
+			And I don't see Mark as shipped
+			And I see Customer: User (user@example.com)
+			And I see Chair Four chair legs $1.5 1 $1.5 $1.5
+		When I click on Mark as returned
+		Then I'm on /admin/dashboard
+			And I see Order is now returned
+			And I see Pending (0) Cancelled (0) Paid (0) Shipped (0) Returned (1)
+
+	Scenario: dashboard with a returned order
+	    Given a returned order
+	    Given an admin
+		When I authentificate as an admin
+			And I click on Admin
+		Then I'm on /admin/dashboard
+			And I see Pending (0) Cancelled (0) Paid (0) Shipped (0) Returned (1)
+			And I see User $1.5
+		When I go to /admin/dashboard/1/cancel
+		Then I see Order must be pending
+		When I go to /admin/dashboard/1/ship
+		Then I see Order must be paid
+		When I go to /admin/dashboard/1/return
+		Then I see Order must be shipped
+		When I click on Details
+		Then I'm on /admin/dashboard/1
+			And I see Status: returned
+			And I don't see Status: returned Cancel
+			And I don't see Mark as returned
+			And I don't see Mark as shipped
+			And I see Customer: User (user@example.com)
+			And I see Chair Four chair legs $1.5 1 $1.5 $1.5

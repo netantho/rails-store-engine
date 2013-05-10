@@ -2,20 +2,18 @@
   <thead>
   	<tr>
   	  <th></th>
-  	  <th>Status</th>
   	  <th>Submission date</th>
-  	  <th>Shipment/Cancellation date</th>
+  	  <th>Customer</th>
   	  <th>Total Price</th>
   	</tr>
   </thead>
   <tbody>
-  	<% if @orders %>
-	  <% @orders.each do |order| %>
+  	<% if orders %>
+	  <% orders.each do |order| %>
 		<tr>
-		  <td><a href="<%= order_path order %>" class="btn">Details</td>
-		  <td><%= order.status %></td>
+		  <td><a href="<%= admin_dashboard_show_path order %>" class="btn">Details</td>
 		  <td><%= order.created_at %></td>
-		  <td><%= order.date_shipment %></td>
+		  <td><%= order.user.full_name %></td>
 		  <td>$<%= order.total_price %></td>
 		</tr>
 	  <% end %>

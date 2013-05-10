@@ -5,4 +5,10 @@ class Order < ActiveRecord::Base
   validates :status, inclusion: { in: ['pending', 'cancelled', 'paid', 'shipped', 'returned'] }
   has_many :sales
   belongs_to :user
+
+  scope :pending, lambda { where(status: 'pending') }
+  scope :cancelled, lambda { where(status: 'cancelled') }
+  scope :paid, lambda { where(status: 'paid') }
+  scope :shipped, lambda { where(status: 'shipped') }
+  scope :returned, lambda { where(status: 'returned') }
 end

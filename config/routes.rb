@@ -58,7 +58,14 @@ StoreEngine::Application.routes.draw do
     end
     resources :categories
   end
-  
+  match 'admin/dashboard' => 'admin/dashboard#index'
+  match 'admin/dashboard/:id' => 'admin/dashboard#show', as: :admin_dashboard_show
+  match 'admin/dashboard/:id/add/:sale_id' => 'admin/dashboard#add', as: :admin_dashboard_add
+  match 'admin/dashboard/:id/del/:sale_id' => 'admin/dashboard#del', as: :admin_dashboard_del
+  match 'admin/dashboard/:id/cancel' => 'admin/dashboard#cancel', as: :admin_dashboard_cancel
+  match 'admin/dashboard/:id/return' => 'admin/dashboard#return', as: :admin_dashboard_return
+  match 'admin/dashboard/:id/ship' => 'admin/dashboard#ship', as: :admin_dashboard_ship
+
   resources :sessions
   resources :users
   resources :products
@@ -72,7 +79,6 @@ StoreEngine::Application.routes.draw do
   
   match '/orders' => 'orders#index', as: :orders
   match '/orders/:id' => 'orders#show',as: :order
-
 
   root :to => 'products#index'
 

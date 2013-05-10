@@ -10,5 +10,21 @@ FactoryGirl.define do
       order.sales << FactoryGirl.build(:sale)
       order.user = FactoryGirl.build(:user)
     end
+
+    factory :order_cancelled do
+      status "cancelled"
+    end
+
+    factory :order_paid do
+      status "paid"
+    end
+
+    factory :order_shipped do
+      status "shipped"
+    end
+
+    factory :order_returned do
+      status "returned"
+    end
   end
 end

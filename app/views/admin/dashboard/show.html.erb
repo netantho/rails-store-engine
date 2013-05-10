@@ -1,0 +1,65 @@
+<div class="span12">
+	<p>
+		Status: <strong><%= @order.status %></strong>
+		<% if @order.status == 'pending' %>
+			<a href="<%= admin_dashboard_cancel_path @order.id %>" class="btn btn-danger">Cancel</a>
+		<% elsif @order.status == 'shipped' %>
+			<a href="<%= admin_dashboard_return_path @order.id %>" class="btn btn-danger">Mark as returned</a>
+		<% elsif @order.status == 'paid' %>
+			<a href="<%= admin_dashboard_ship_path @order.id %>" class="btn btn-success">Mark as shipped</a>
+		<% end %>
+	</p> 
+	<p>Submission date: <%= @order.created_at %></p>
+	<p>
+		Customer: <%= @order.user.full_name %>
+		(<a href='mailto:<%= @order.user.email %>'><%= @order.user.email %></a>)
+	</p>
+	<p><%= "Shipment/Cancellation date: #{@order.date_shipment}" if ['shipped', 'cancelled'].include? @order.status %></p>
+	
+	<table class="table">
+	  <thead>
+	  	<tr>
+	  	  <th></th>
+	  	  <th></th>
+	  	  <th>Price</th>
+	  	  <th>Quantity</th>
+	  	  <th>Total</th>
+	  	</tr>
+	  </thead>
+	  <tbody>
+	    <% @order.sales.each do |sale| %>
+		  <tr>
+		    <td><%= image_tag sale.product.photo, {style: 'height: 60px;'} if sale.product.photo %></td>
+		  	<td>
+		  	  <p class="text-bold text-huge">
+		  	  		<a href="<%= product_path sale.product %>"><%= sale.product.title %></a>
+		  	  </p>
+		  	  <p><%= sale.product.description %></p>
+		  	</td>
+		  	<td>$<%= sale.price %></td>
+		  	<td>
+		  		<%= sale.quantity %>
+		  		<% if ['pending', 'paid'].include? @order.status %>
+			  	  	<p>
+				  	  <a href="<%= admin_dashboard_add_path(id: @order.id, sale_id: sale.id) %>" class="btn btn-success">
+				  	  	<i class="icon-plus-sign icon-white"></i>
+				  	  </a>
+				  	  <a href="<%= admin_dashboard_del_path(id: @order.id, sale_id: sale.id) %>" class="btn btn-danger">
+				  	  	<i class="icon-minus-sign icon-white"></i>
+				  	  </a>
+			  	    </p>
+		  	    <% end %>
+		  	</td>
+		  	<td>$<%= sale.price * sale.quantity %></td>
+		  </tr>
+	    <% end %>
+	    <tr>
+	      <td></td>
+	  	  <td></td>
+	  	  <td></td>
+	  	  <td></td>
+	  	  <td>$<%= @order.total_price %></td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
